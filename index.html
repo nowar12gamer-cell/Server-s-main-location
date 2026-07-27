@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقديم السيرفر</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- مشغل الموسيقى -->
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="https://www.youtube.com/embed/Z1LUj7_8xiI" type="audio/mpeg">
+    </audio>
+
+    <div class="music-control">
+        <button onclick="toggleMusic()" class="music-btn">🔊 الموسيقى</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🎮 مرحباً بك في السيرفر</h1>
+            <p>تم صنع هذا الموقع بصفة ريكو</p>
+        </div>
+
+        <div class="buttons-container">
+            <button class="btn btn-rules" onclick="showRules()">📋 القوانين</button>
+            <button class="btn btn-apply" onclick="showApplication()">📝 التقديم</button>
+        </div>
+
+        <!-- القوانين -->
+        <div id="rulesModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" onclick="closeRules()">&times;</span>
+                <h2>⚖️ قوانين لعبة الأدوار (Roleplay)</h2>
+                <div class="rules-text">
+                    
+                    <h3>📌 القوانين الأساسية:</h3>
+                    <ul>
+                        <li><strong>احترم جميع اللاعبين:</strong> لا تستخدم الألفاظ النابية أو الإهانات</li>
+                        <li><strong>الالتزام بالشخصية:</strong> عندما تختار دور، التزم به بشكل كامل</li>
+                        <li><strong>ممنوع الخروج من الدور:</strong> لا تتحدث عن أشياء خارج سياق اللعبة</li>
+                        <li><strong>الامتثال لقرارات الإدارة:</strong> قرارات المشرفين والإداريين نهائية</li>
+                    </ul>
+
+                    <h3>⚡ قوانين اللعب:</h3>
+                    <ul>
+                        <li><strong>ممنوع Meta Gaming:</strong> استخدام معلومات من خارج اللعبة للعب</li>
+                        <li><strong>ممنوع Power Gaming:</strong> استخدام قوى خارقة غير مصرحة</li>
+                        <li><strong>ممنوع Metagaming:</strong> التجسس على لاعبين آخرين</li>
+                        <li><strong>الامتثال للقوانين الفيزيائية:</strong> لا تفعل حركات مستحيلة</li>
+                        <li><strong>ممنوع التورط في النزاعات بلا سبب:</strong> يجب أن يكون لديك سبب واقعي</li>
+                    </ul>
+
+                    <h3>💰 قوانين العصابات والأموال:</h3>
+                    <ul>
+                        <li><strong>ممنوع التسلسل:</strong> عملياتك يجب أن تكون منطقية ولها خطة</li>
+                        <li><strong>احترم نطاق النفوذ:</strong> كل عصابة لها منطقة معينة</li>
+                        <li><strong>ممنوع السرقة من الأعضاء:</strong> تعامل مع الأموال بشفافية</li>
+                        <li><strong>التفاوض قبل الحرب:</strong> حاول التفاوض قبل أي صراع</li>
+                        <li><strong>ممنوع الغش في العمليات:</strong> كل العمليات يجب أن تكون عادلة</li>
+                    </ul>
+
+                    <h3>🏘️ قوانين المدينة:</h3>
+                    <ul>
+                        <li><strong>احترم الممتلكات:</strong> لا تدخل المنازل بدون إذن</li>
+                        <li><strong>التزم بقوانين المرور:</strong> اتبع إشارات المرور والسرعة</li>
+                        <li><strong>ممنوع السرقة:</strong> السرقة لها عقوبات شديدة</li>
+                        <li><strong>احترم الأماكن الحكومية:</strong> لا تدخل مقار الشرطة بدون سبب</li>
+                        <li><strong>الامتثال للقانون:</strong> اتبع قوانين الدولة والشرطة</li>
+                    </ul>
+
+                    <h3>🚔 قوانين الشرطة والقانون:</h3>
+                    <ul>
+                        <li><strong>حقوق المشتبه بهم:</strong> للمشتبه به الحق في محاماة</li>
+                        <li><strong>ممنوع التعذيب:</strong> تحريم كامل للتعذيب</li>
+                        <li><strong>احترم حقوق الإنسان:</strong> معاملة جميع المعتقلين باحترام</li>
+                        <li><strong>التحقيق العادل:</strong> التحقيقات يجب أن تكون عادلة وشفافة</li>
+                    </ul>
+
+                    <h3>⚠️ العقوبات:</h3>
+                    <ul>
+                        <li><strong>التحذير الأول:</strong> لأول انتهاك</li>
+                        <li><strong>الإنذار الثاني:</strong> إذا تكرر الفعل</li>
+                        <li><strong>الحظر المؤقت:</strong> 24 ساعة للانتهاكات الخطيرة</li>
+                        <li><strong>الحظر الدائم:</strong> للانتهاكات الخطيرة جداً</li>
+                    </ul>
+
+                    <h3>✅ نصائح للعب الأفضل:</h3>
+                    <ul>
+                        <li>اقضِ وقتاً في بناء قصتك الخاصة</li>
+                        <li>تعاون مع اللاعبين الآخرين</li>
+                        <li>اسأل المشرفين إذا كان لديك سؤال</li>
+                        <li>استمتع باللعبة وكن إيجابياً</li>
+                        <li>ساعد اللاعبين الجدد على التعلم</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- نموذج التقديم -->
+        <div id="applicationModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" onclick="closeApplication()">&times;</span>
+                <h2>📋 نموذج التقديم</h2>
+                <form id="applicationForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="name">اسم الشخص:</label>
+                        <input type="text" id="name" name="name" required placeholder="أدخل اسمك">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">السن:</label>
+                        <input type="number" id="age" name="age" required placeholder="أدخل سنك">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gangApplication">التقديم على عصابات:</label>
+                        <textarea id="gangApplication" name="gangApplication" placeholder="اكتب تقديمك على العصابات"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serverApplication">التقديم على السيرفر:</label>
+                        <textarea id="serverApplication" name="serverApplication" placeholder="لماذا تريد الانضمام للسيرفر؟"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="complaint">شكوى أو اقتراح:</label>
+                        <textarea id="complaint" name="complaint" placeholder="هل لديك شكوى أو اقتراح؟"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">✉️ إرسال</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="successMessage" class="success-message hidden">
+            ✅ تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً.
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
