@@ -1,41 +1,40 @@
-// ===============================
-// تم صنع هذا الموقع بواسطة ريكو
-// ===============================
+// ==========================
+// شاشة البداية
+// ==========================
 
-const text = "تم صنع هذا الموقع بواسطة ريكو";
+const message = "تم صنع هذا الموقع بواسطة ريكو";
 
 const typing = document.getElementById("typing");
-const loading = document.getElementById("loading");
-const main = document.getElementById("main");
+const loading = document.getElementById("loading-screen");
+const main = document.getElementById("main-page");
 
-const typingSound = document.getElementById("typingSound");
+const typingAudio = document.getElementById("typing-audio");
 
-let index = 0;
+let i = 0;
 
-function typeWriter() {
+function writeText(){
 
-    if (index < text.length) {
+    if(i < message.length){
 
-        typing.innerHTML += text.charAt(index);
+        typing.innerHTML += message.charAt(i);
 
-        if (typingSound) {
-            typingSound.currentTime = 0;
-            typingSound.play().catch(() => {});
+        if(typingAudio){
+            typingAudio.currentTime = 0;
+            typingAudio.play().catch(()=>{});
         }
 
-        index++;
+        i++;
 
-        setTimeout(typeWriter, 90);
+        setTimeout(writeText,90);
 
-    } else {
+    }else{
 
-        setTimeout(() => {
+        setTimeout(()=>{
 
             loading.style.opacity = "0";
-
             loading.style.transition = "1s";
 
-            setTimeout(() => {
+            setTimeout(()=>{
 
                 loading.style.display = "none";
 
@@ -49,110 +48,57 @@ function typeWriter() {
 
 }
 
-window.onload = () => {
+window.onload = writeText;
 
-    typeWriter();
 
-};
+// ==========================
+// تشغيل الموسيقى
+// ==========================
 
-// ===============================
-// زر تشغيل الموسيقى
-// ===============================
-
-const musicBtn = document.getElementById("musicBtn");
-
-const youtube = document.getElementById("youtube");
+const musicBtn = document.getElementById("music");
+const player = document.getElementById("youtube-player");
 
 let playing = false;
 
-musicBtn.onclick = () => {
+musicBtn.addEventListener("click",()=>{
 
     if(!playing){
 
-        youtube.src =
-        "https://www.youtube.com/embed/videoseries?list=RDZ1LUj7_8xiI&autoplay=1&loop=1";
+        player.src="https://www.youtube.com/embed/videoseries?list=RDZ1LUj7_8xiI&autoplay=1&loop=1";
 
-        musicBtn.innerHTML = "⏸️ إيقاف الموسيقى";
+        musicBtn.innerHTML="⏸️ إيقاف الموسيقى";
 
-        playing = true;
+        playing=true;
 
     }else{
 
-        youtube.src =
-        "https://www.youtube.com/embed/videoseries?list=RDZ1LUj7_8xiI";
+        player.src="";
 
-        musicBtn.innerHTML = "🎵 تشغيل الموسيقى";
+        musicBtn.innerHTML="🎵 تشغيل الموسيقى";
 
-        playing = false;
+        playing=false;
 
     }
 
-};
+});
 
-// ===============================
-// تأثير ظهور الأزرار
-// ===============================
 
-document.querySelectorAll(".btn").forEach((btn)=>{
+// ==========================
+// تأثير بسيط للأزرار
+// ==========================
 
-    btn.addEventListener("mouseenter",()=>{
+document.querySelectorAll("button").forEach(btn=>{
 
-        btn.style.transform = "scale(1.08)";
+    btn.addEventListener("mousedown",()=>{
 
-    });
-
-    btn.addEventListener("mouseleave",()=>{
-
-        btn.style.transform = "scale(1)";
+        btn.style.transform="scale(.95)";
 
     });
 
-});    let appModal = document.getElementById('applicationModal');
-    
-    if (event.target === rulesModal) {
-        rulesModal.classList.add('hidden');
-    }
-    if (event.target === appModal) {
-        appModal.classList.add('hidden');
-    }
-}
+    btn.addEventListener("mouseup",()=>{
 
-// إرسال النموذج
-function submitForm(event) {
-    event.preventDefault();
+        btn.style.transform="scale(1)";
 
-    const formData = {
-        name: document.getElementById('name').value,
-        age: document.getElementById('age').value,
-        gangApplication: document.getElementById('gangApplication').value,
-        serverApplication: document.getElementById('serverApplication').value,
-        complaint: document.getElementById('complaint').value
-    };
-
-    // إرسال البيانات للسيرفر
-    fetch('/send-email', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        // إظهار رسالة النجاح
-        document.getElementById('applicationForm').style.display = 'none';
-        document.getElementById('successMessage').classList.remove('hidden');
-        
-        // إعادة تعيين النموذج بعد ثانيتين وإغلاق الـ Modal
-        setTimeout(() => {
-            document.getElementById('applicationForm').reset();
-            document.getElementById('applicationForm').style.display = 'block';
-            document.getElementById('successMessage').classList.add('hidden');
-            closeApplication();
-        }, 2000);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('حدث خطأ في الإرسال. حاول مجدداً.');
     });
-}
+
+});
