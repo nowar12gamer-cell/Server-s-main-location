@@ -1,66 +1,113 @@
-// متغير للتحكم في الموسيقى
-let isMusicPlaying = false;
+// ===============================
+// تم صنع هذا الموقع بواسطة ريكو
+// ===============================
 
-// عرض القوانين
-function showRules() {
-    document.getElementById('rulesModal').classList.remove('hidden');
-}
+const text = "تم صنع هذا الموقع بواسطة ريكو";
 
-// إغلاق القوانين
-function closeRules() {
-    document.getElementById('rulesModal').classList.add('hidden');
-}
+const typing = document.getElementById("typing");
+const loading = document.getElementById("loading");
+const main = document.getElementById("main");
 
-// عرض نموذج التقديم
-function showApplication() {
-    document.getElementById('applicationModal').classList.remove('hidden');
-}
+const typingSound = document.getElementById("typingSound");
 
-// إغلاق نموذج التقديم
-function closeApplication() {
-    document.getElementById('applicationModal').classList.add('hidden');
-}
+let index = 0;
 
-// التحكم في الموسيقى
-function toggleMusic() {
-    const music = document.getElementById('backgroundMusic');
-    const btn = document.querySelector('.music-btn');
-    
-    if (isMusicPlaying) {
-        music.pause();
-        btn.textContent = '🔇 الموسيقى';
-        btn.classList.remove('playing');
-        isMusicPlaying = false;
+function typeWriter() {
+
+    if (index < text.length) {
+
+        typing.innerHTML += text.charAt(index);
+
+        if (typingSound) {
+            typingSound.currentTime = 0;
+            typingSound.play().catch(() => {});
+        }
+
+        index++;
+
+        setTimeout(typeWriter, 90);
+
     } else {
-        music.play();
-        btn.textContent = '🔊 الموسيقى';
-        btn.classList.add('playing');
-        isMusicPlaying = true;
+
+        setTimeout(() => {
+
+            loading.style.opacity = "0";
+
+            loading.style.transition = "1s";
+
+            setTimeout(() => {
+
+                loading.style.display = "none";
+
+                main.classList.remove("hidden");
+
+            },1000);
+
+        },1500);
+
     }
+
 }
 
-// تشغيل الموسيقى تلقائياً عند فتح الصفحة
-window.addEventListener('load', function() {
-    const music = document.getElementById('backgroundMusic');
-    const btn = document.querySelector('.music-btn');
-    
-    // محاولة التشغيل التلقائي
-    music.play().then(() => {
-        isMusicPlaying = true;
-        btn.textContent = '🔊 الموسيقى';
-        btn.classList.add('playing');
-    }).catch(() => {
-        // إذا فشل التشغيل التلقائي، اجعل المستخدم يضغط الزر
-        console.log('التشغيل التلقائي معطل - انقر على زر الموسيقى');
-        isMusicPlaying = false;
-        btn.textContent = '🔇 الموسيقى';
-    });
-});
+window.onload = () => {
 
-// إغلاق Modal عند الضغط خارجه
-window.onclick = function(event) {
-    let rulesModal = document.getElementById('rulesModal');
-    let appModal = document.getElementById('applicationModal');
+    typeWriter();
+
+};
+
+// ===============================
+// زر تشغيل الموسيقى
+// ===============================
+
+const musicBtn = document.getElementById("musicBtn");
+
+const youtube = document.getElementById("youtube");
+
+let playing = false;
+
+musicBtn.onclick = () => {
+
+    if(!playing){
+
+        youtube.src =
+        "https://www.youtube.com/embed/videoseries?list=RDZ1LUj7_8xiI&autoplay=1&loop=1";
+
+        musicBtn.innerHTML = "⏸️ إيقاف الموسيقى";
+
+        playing = true;
+
+    }else{
+
+        youtube.src =
+        "https://www.youtube.com/embed/videoseries?list=RDZ1LUj7_8xiI";
+
+        musicBtn.innerHTML = "🎵 تشغيل الموسيقى";
+
+        playing = false;
+
+    }
+
+};
+
+// ===============================
+// تأثير ظهور الأزرار
+// ===============================
+
+document.querySelectorAll(".btn").forEach((btn)=>{
+
+    btn.addEventListener("mouseenter",()=>{
+
+        btn.style.transform = "scale(1.08)";
+
+    });
+
+    btn.addEventListener("mouseleave",()=>{
+
+        btn.style.transform = "scale(1)";
+
+    });
+
+});    let appModal = document.getElementById('applicationModal');
     
     if (event.target === rulesModal) {
         rulesModal.classList.add('hidden');
